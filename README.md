@@ -1,10 +1,42 @@
-# ayuna monorepo
+# Ayuna Monorepo
 
-[![Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](LICENSE)
+[![Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](#ayuna-monorepo-license)
 
-> The template repository to create monorepo project for golang, python, and typescript managed by **[nx](https://nx.dev)**. It uses **[@ayunaio/scaffold](https://www.npmjs.com/package/@ayunaio/scaffold)** Nx plugin for scaffolding and workspace management.
+> The template repository to create monorepo project for golang, python, and typescript managed by **[nx](https://nx.dev)**.
+> It uses **[@ayunaio/scaffold](https://www.npmjs.com/package/@ayunaio/scaffold)** Nx plugin for scaffolding and workspace management.
 >
-> This template project is licensed under the **Unlicense**. You can add appropriate license to your derived monorepo as needed.
+
+## Ayuna Monorepo License
+
+The `ayuna-monorepo` template project itself is released under the **Unlicense** (*license text below*).
+You can add appropriate license file(s) to your derived monorepo as needed.
+
+```md
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <https://unlicense.org>
+```
 
 ---
 
