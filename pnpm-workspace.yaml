@@ -1,6 +1,4 @@
-packages:
-  - 'libs/*'
-  - 'apps/*'
+packages: []
 allowBuilds:
   '@bufbuild/buf': true
   '@parcel/watcher': true
@@ -9,4 +7,4 @@ allowBuilds:
   nx: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@ayunaio/scaffold@0.1.5'
+  - '@ayunaio/scaffold@0.1.6'
