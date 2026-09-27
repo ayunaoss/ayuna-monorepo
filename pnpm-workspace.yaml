@@ -1,2 +1,10 @@
 packages:
-  - 'packages/*'
+  - 'libs/*'
+  - 'apps/*'
+allowBuilds:
+  '@bufbuild/buf': true
+  '@parcel/watcher': true
+  '@swc/core': true
+  core-js-pure: true
+  nx: true
+  unrs-resolver: true

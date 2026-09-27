@@ -1,109 +1,127 @@
-# New Nx Repository
+# ayuna monorepo
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+[![Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg?style=flat-square)](LICENSE)
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+> The template repository to create monorepo project for golang, python, and typescript managed by **[nx](https://nx.dev)**. It uses **[@ayunaio/scaffold](https://www.npmjs.com/package/@ayunaio/scaffold)** Nx plugin for scaffolding and workspace management.
+>
+> This template project is licensed under the **Unlicense**. You can add appropriate license to your derived monorepo as needed.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/docs/technologies/typescript/introduction?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+---
 
-🚀 If you haven't connected to Nx Cloud yet, [complete your setup here](https://cloud.nx.app/get-started). Get faster builds with remote caching, distributed task execution, and self-healing CI. [See how your workspace can benefit](#nx-cloud).
+## Supported Stacks
 
-## Generate a library
+`@ayunaio/scaffold` provides opinionated **[nx](https://nx.dev)** project generators for:
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+* **Buf:** Protobuf based code generation using **[buf](https://buf.build)**
+* **Golang:** `go.mod` based setup targeting Go 1.27+
+* **Python:** `uv` based dependency and environment management targeting Python 3.12+
+* **TypeScript:** `pnpm` based configuration targeting Node.js 24+ (LTS)
+
+The provided generators are;
+
+* **bufgen**: Codegen using **[buf](https://buf.build)** and protobuf definitions
+* **go-lib**: Golang library project using `go 1.27`
+* **go-app**: Golang application project using `go 1.27`
+* **py-lib**: Python library project using `uv` with `python 3.12`
+* **py-app**: Python application project using `uv` with `python 3.12`
+* **ts-lib**: TypeScript library project using `pnpm` with `nodejs 24.x`
+* **ts-app**: TypeScript application project using `pnpm` with `nodejs 24.x`
+
+The provided executors are;
+
+* **workspace-sync**: Synchronize the workspace state
+* **workspace-purge**: Purge the workspace state
+
+## Initial Setup
+
+Before generating any project, ensure to update the monorepo project name in the base configuration files.
+For example, if you choose the namespace as `acmecorp` and the name as `my-examples`,
+
+* Replace `@ayunaio/monorepo` occurrences with `@acmecorp/my-examples` in `package.json` and `tsconfig.base.json` files in the monorepo root.
+* Replace `ayuna-monorepo` occurrences with `acmecorp-my-examples` in `pyproject.toml` file in the monorepo root.
+* Run the command `pnpm nx sync` to synchronize the workspace entries.
+
+> **IMPORTANT**:
+>
+> * Do not delete the configuration files in the monorepo root. They are needed for proper workspace management and synchronization.
+> * Ensure to update this *README* file with appropriate documentation for your monorepo project.
+
+## Manage Projects
+
+All the commands given below, should be run from the monorepo root, unless stated otherwise.
+
+### Initialize the protobuf and codegen folder structures
+
+```bash
+# Initialize the bufgen structure - buf.build configurations.
+# This creates 'bufgen' folder in the monorepo root and adds
+# buf.yaml, buf.gen.yaml and namespace folder to add .proto files.
+pnpm nx g @ayunaio/scaffold:bufgen
+
+# Generate code from .proto definitions (For e.g., bufgen/ayuna/v1/greeting.proto)
+# Ensure that you add the required .proto files before running this.
+# This adds generated protobuf code for golang, python and typescript under
+# bufgen/go, bufgen/py and bufgen/ts folders respectively.
+pnpm nx run ayuna-bufgen:codegen
+
+# Update the root-level go.work, pnpm-workspace.yaml and pyproject.toml
+# to ensure bufgen/go, bufgen/py and bufgen/ts workspace entries are
+# registered.
+pnpm nx workspace-sync
 ```
 
-## Run tasks
+### Generate libraries or applications as needed
 
-To build the library use:
+```bash
+# To generate a Go library and register it
+# in root-level go.work file
+pnpm nx g @ayunaio/scaffold:go-lib
 
-```sh
-npx nx run pkg1:build
+# To generate a Go application and register it
+# in the root-level go.work file
+pnpm nx g @ayunaio/scaffold:go-app
+
+# To generate a Python library and register it
+# in the root-level pyproject.toml file
+pnpm nx g @ayunaio/scaffold:py-lib
+
+# To generate a Python application and register it
+# in the root-level pyproject.toml file
+pnpm nx g @ayunaio/scaffold:py-app
+
+# To generate a TypeScript library and register it
+# in the root-level pnpm-workspace.yaml file
+pnpm nx g @ayunaio/scaffold:ts-lib
+
+# To generate a TypeScript application and register it
+# in the root-level pnpm-workspace.yaml file
+pnpm nx g @ayunaio/scaffold:ts-app
 ```
 
-To run any task with Nx use:
+### Sync workspace entries
 
-```sh
-npx nx run <project-name>:<target>
+In order to ensure all generated (using *pnpm nx g @ayunaio/scaffold:...*), workspace projects have their entries updated in the root-level go.work, pyproject.toml or pnpm-workspace.yaml, you can run the following idempotent command.
+
+```bash
+pnpm nx workspace-sync
 ```
 
-These targets are either [inferred automatically](https://nx.dev/docs/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+### Cleanup generated stale code
 
-[More about running tasks in the docs &raquo;](https://nx.dev/docs/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Run the following commands to clean the code generated by stale .proto definitions which might have been removed or renamed and regenerate the updated code again. The commands are idempotent.
 
-## Versioning and releasing
+```bash
+# First, purge the generated stale code
+pnpm nx run ayuna-bufgen:codepurge
 
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](https://nx.dev/docs/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
+# Then, regenerate the updated code
+pnpm nx run ayuna-bufgen:codegen
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+### Cleanup stale workspace entries
 
-```sh
-npx nx sync:check
+In case you have manually deleted any of the generated projects, run the following command to update the the root-level go.work, pnpm-workspace.yaml and pyproject.toml files. This command is idempotent.
+
+```bash
+pnpm nx workspace-purge
 ```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-## Nx Cloud
-
-Nx Cloud ensures a [fast and scalable CI](https://nx.dev/nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/docs/features/ci-features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/docs/features/ci-features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/docs/features/ci-features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/docs/features/ci-features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Set up CI (non-Github Actions CI)
-
-**Note:** This is only required if your CI provider is not GitHub Actions.
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/docs/features/ci-features?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/docs/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## 🔗 Learn More
-
-- [Nx Documentation](https://nx.dev/docs)
-- [Crafting Your Workspace Tutorial](https://nx.dev/docs/getting-started/tutorials/crafting-your-workspace)
-- [Module Boundaries](https://nx.dev/docs/features/enforce-module-boundaries)
-- [Releasing Packages](https://nx.dev/docs/features/manage-releases)
-- [Nx Plugins](https://nx.dev/docs/concepts/nx-plugins)
-- [Nx Cloud](https://nx.dev/nx-cloud)
-
-## 💬 Community
-
-Join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [X (Twitter)](https://twitter.com/nxdevtools)
-- [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [YouTube](https://www.youtube.com/@nxdevtools)
-- [Blog](https://nx.dev/blog)

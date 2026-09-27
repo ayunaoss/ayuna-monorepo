@@ -21,6 +21,16 @@
       }
     }
   ],
+  "targetDefaults": {
+    "workspace-sync": {
+      "executor": "@ayunaio/scaffold:workspace-sync",
+      "cache": false
+    },
+    "workspace-purge": {
+      "executor": "@ayunaio/scaffold:workspace-purge",
+      "cache": false
+    }
+  },
   "neverConnectToCloud": true,
   "analytics": false
 }
