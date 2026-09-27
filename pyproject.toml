@@ -1,5 +1,5 @@
 [project]
-name = "ayuna-monorepo"
+name = "ayunaio-monorepo"
 version = "0.1.0"
 requires-python = ">=3.12,<3.14"
 license-files = ["LICENSE"]
