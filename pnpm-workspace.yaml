@@ -9,4 +9,4 @@ allowBuilds:
   nx: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@ayunaio/scaffold@0.1.4'
+  - '@ayunaio/scaffold@0.1.5'
