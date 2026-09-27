@@ -8,3 +8,5 @@ allowBuilds:
   core-js-pure: true
   nx: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@ayunaio/scaffold@0.1.4'
