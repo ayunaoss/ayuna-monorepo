@@ -20,4 +20,4 @@ minimumReleaseAgeExclude:
   - '@swc/core-win32-ia32-msvc@1.16.13'
   - '@swc/core-win32-x64-msvc@1.16.13'
   - '@swc/core@1.16.13'
-  - '@ayunaio/scaffold@0.1.7'
+  - '@ayunaio/scaffold@0.1.8'
