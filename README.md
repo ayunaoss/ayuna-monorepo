@@ -48,7 +48,7 @@ For more information, please refer to <https://unlicense.org>
 Before generating any project, ensure to update the monorepo project name in the base configuration files.
 For example, if you choose the namespace as `acmecorp` and the name as `my-examples`,
 
-* Replace `@ayunaio/monorepo` occurrences with `@acmecorp/my-examples` in `package.json` and `tsconfig.base.json` files in the monorepo root.
+* Replace `@ayunaio/monorepo` occurrences with `@acmecorp/my-examples` in `package.json` file in the monorepo root.
 * Replace `ayunaio-monorepo` occurrences with `acmecorp-my-examples` in `pyproject.toml` file in the monorepo root.
 * Run the command `pnpm nx sync` to synchronize the workspace entries.
 
