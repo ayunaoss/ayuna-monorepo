@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@ayunaio/scaffold':
-        specifier: ^0.1.8
-        version: 0.1.8(nx@23.2.0(@swc-node/register@1.11.1(@swc/core@1.15.8(@swc/helpers@0.5.18))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.15.8(@swc/helpers@0.5.18)))
+        specifier: ^0.1.9
+        version: 0.1.9(nx@23.2.0(@swc-node/register@1.11.1(@swc/core@1.15.8(@swc/helpers@0.5.18))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.15.8(@swc/helpers@0.5.18)))
       '@biomejs/biome':
         specifier: ^2.5.15
         version: 2.5.15
@@ -47,8 +47,8 @@ importers:
 
 packages:
 
-  '@ayunaio/scaffold@0.1.8':
-    resolution: {integrity: sha512-vadlWk+p7Zs/KPugVl02pieIhAwZWu5IXIobLEyKKaZ+SQLu1gJLXMP47vH8nRiVuikBW2KaG5iMwDUMMmKzKA==}
+  '@ayunaio/scaffold@0.1.9':
+    resolution: {integrity: sha512-NgOF9JBad4r/qDODttdt4PreDA8U09wbSJmtqOvKgN011Rf5O27s/NHjhl+zYz5RVdpsRRvJvvr8pHBMHyoXbg==}
 
   '@babel/code-frame@7.29.7':
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
@@ -2998,7 +2998,7 @@ packages:
 
 snapshots:
 
-  '@ayunaio/scaffold@0.1.8(nx@23.2.0(@swc-node/register@1.11.1(@swc/core@1.15.8(@swc/helpers@0.5.18))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.15.8(@swc/helpers@0.5.18)))':
+  '@ayunaio/scaffold@0.1.9(nx@23.2.0(@swc-node/register@1.11.1(@swc/core@1.15.8(@swc/helpers@0.5.18))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.15.8(@swc/helpers@0.5.18)))':
     dependencies:
       '@bufbuild/buf': 1.73.0
       '@nx/devkit': 23.2.0(nx@23.2.0(@swc-node/register@1.11.1(@swc/core@1.15.8(@swc/helpers@0.5.18))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.15.8(@swc/helpers@0.5.18)))

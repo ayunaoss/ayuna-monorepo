@@ -6,6 +6,8 @@ allowBuilds:
   core-js-pure: true
   nx: true
   unrs-resolver: true
+  '@biomejs/biome': true
+  esbuild: true
 minimumReleaseAgeExclude:
   - '@swc/core-darwin-arm64@1.16.13'
   - '@swc/core-darwin-x64@1.16.13'
@@ -20,4 +22,4 @@ minimumReleaseAgeExclude:
   - '@swc/core-win32-ia32-msvc@1.16.13'
   - '@swc/core-win32-x64-msvc@1.16.13'
   - '@swc/core@1.16.13'
-  - '@ayunaio/scaffold@0.1.8'
+  - '@ayunaio/scaffold@0.1.9'

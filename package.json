@@ -5,7 +5,7 @@
 	"scripts": {},
 	"private": true,
 	"devDependencies": {
-		"@ayunaio/scaffold": "^0.1.8",
+		"@ayunaio/scaffold": "^0.1.9",
 		"@biomejs/biome": "^2.5.15",
 		"@bufbuild/buf": "^1.73.0",
 		"@nx/js": "23.2.0",

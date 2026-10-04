@@ -43,32 +43,6 @@ For more information, please refer to <https://unlicense.org>
 
 ---
 
-## Supported Stacks
-
-`@ayunaio/scaffold` provides opinionated **[nx](https://nx.dev)** project generators for:
-
-* **Buf:** Protobuf based code generation using **[buf](https://buf.build)**
-* **Golang:** `go.mod` based setup targeting Go 1.27+
-* **Python:** `uv` based dependency and environment management targeting Python 3.12+
-* **TypeScript:** `pnpm` based configuration targeting Node.js 24+ (LTS)
-
-The provided generators are;
-
-* **bufgen**: Codegen using **[buf](https://buf.build)** and protobuf definitions
-* **go-lib**: Golang library project using `go 1.27`
-* **go-app**: Golang application project using `go 1.27`
-* **py-lib**: Python library project using `uv` with `python 3.12`
-* **py-app**: Python application project using `uv` with `python 3.12`
-* **ts-lib**: TypeScript library project using `pnpm` with `nodejs 24.x`
-* **ts-app**: TypeScript application project using `pnpm` with `nodejs 24.x`
-
-The provided executors are;
-
-* **workspace-sync**: Synchronize the workspace state
-* **workspace-purge**: Purge the workspace state
-
----
-
 ## Initial Setup
 
 Before generating any project, ensure to update the monorepo project name in the base configuration files.
