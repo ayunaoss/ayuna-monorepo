@@ -37,6 +37,11 @@ help = "Remove ruff, pytest, and Python cache directories - Use 'uv run poe clea
 
 [dependency-groups]
 dev = [
+    "cryptography>=44.0.0",
+    "djlint>=1.36.4",
+    "jinja2>=3.1.6",
+    "python-dotenv>=1.2.2",
+    "pyyaml>=6.0.3",
     "poethepoet>=0.34.0,<1.0.0",
     "pylint>=3.2.6,<4.0.0",
     "pyright>=1.1.376,<2.0.0",

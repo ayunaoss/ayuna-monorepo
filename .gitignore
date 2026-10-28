@@ -214,3 +214,4 @@ vite.config.ts.timestamp-*
 !.yarn/versions
 
 test-output
+.marksman.toml
