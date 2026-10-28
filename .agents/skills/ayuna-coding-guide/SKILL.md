@@ -13,13 +13,42 @@ metadata:
 
 Project instructions, configuration, scripts, lockfiles, and CI take precedence. Do not replace established project tooling unless user requests it. Ask before installing software or changing dependencies or lockfiles.
 
-- Always follow `references/project_scaffold.md` for project scaffolding and code generation practices.
-- Use `references/naming_convention.md` when adding, renaming, or reviewing identifiers.
-- Use `references/python_project.md` for Python project preferences.
-- Use `references/golang_project.md` for Golang project preferences.
-- Use `references/typescript_project.md` for TypeScript project preferences.
-- For polyglot projects, use each guide based on the target language.
+- Load only the references needed for the task; do not read all of them.
+  - `references/project_scaffold.md`: scaffolding, code generation, workspace sync/purge.
+  - `references/naming_convention.md`: adding, renaming, or reviewing identifiers.
+  - `references/golang_project.md`: Go work (go.work + go vet).
+  - `references/typescript_project.md`: TypeScript work (pnpm + biome).
+  - `references/python_project.md`: Python work (uv + ruff).
+- For polyglot changes, load the guide for each target language only.
 - Always use conventional commits for commit messages.
+
+## Monorepo Layout
+
+Nx managed monorepo. Default top-level project folders:
+
+- `bufgen/`: reusable protobuf definitions and generated code (`bufgen/go`, `bufgen/py`, `bufgen/ts`).
+- `apps/`: services and applications.
+- `libs/`: libraries.
+
+`apps/` and `libs/` group language-specific projects under `go/`, `py/` and `ts/` (e.g. `libs/py/<name>`, `apps/go/<name>`).
+
+Root-level workspace files define project membership per language:
+
+| Language   | Workspace file                       | Check tooling |
+| ---------- | ------------------------------------ | ------------- |
+| Go         | `go.work`                            | `go vet`      |
+| TypeScript | `pnpm-workspace.yaml`                | `pnpm` + `biome` |
+| Python     | `pyproject.toml` `[tool.uv.workspace]` | `uv` + `ruff` |
+
+- Synchronize all workspace entries: `pnpm nx workspace-sync`.
+- Clean up stale entries of the whole monorepo (e.g. after deleting projects): `pnpm nx workspace-purge`.
+- Never hand-edit workspace member lists when these commands can do it.
+
+## Verification and Debugging
+
+- Use local LSP evidence first (diagnostics, definitions, references, hover) for errors, symbols and types. Fall back to CLI checks only when LSP is unavailable or insufficient.
+- Scope checks to the changed files or the owning project; avoid whole-monorepo runs unless asked.
+- Use the language guide for exact check commands. Repository scripts, Nx targets, and CI take precedence.
 
 ## Containerfile Samples
 

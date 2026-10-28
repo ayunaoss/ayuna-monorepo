@@ -1,0 +1,72 @@
+{
+	// 1. Default Preset & Budget Routing Mode
+	// Note: Runtime slash commands (/preset, /budget) write to opencode-model-router.state.json,
+	// which takes precedence over these defaults once toggled in a session.
+	"activePreset": "ayuna-hybrid",
+	"activeMode": "normal", // Options: "budget" | "normal" | "quality" | "deep"
+
+	// 2. Host Enforcement & Budget Controls
+	"enforcement": {
+		"mode": "strict" // Enforces read-only boundaries and step/dispatch caps
+	},
+
+	// 3. Custom or Overridden Provider Presets
+	// Built-in presets you can also override: "anthropic", "openai", "copilot", "google", "hybrid", "zai"
+	"presets": {
+		"ayuna-hybrid": {
+			"fast": {
+				"model": "anthropic/claude-haiku-5-5",
+				"costRatio": 1, // 1x baseline cost injected into orchestrator prompt
+				"steps": 30, // Max tool steps per subagent dispatch
+				"readOnly": true, // Host-enforced read-only (grep, read, glob, git inspection)
+				"fallback": ["openai/gpt-5.6-luna", "alibaba/qwen3.8-flash"]
+			},
+			"medium": {
+				"model": "anthropic/claude-sonnet-5-5",
+				"costRatio": 5, // Signals to orchestrator that @medium is 5x more expensive than @fast
+				"steps": 50,
+				"readOnly": false, // Allows file edits, rename, shell, and test execution
+				"fallback": ["openai/gpt-5.6-terra", "google/gemini-3.1-pro-preview"]
+			},
+			"heavy": {
+				"model": "moonshotai/kimi-k3",
+				"costRatio": 20, // Reserved for high-complexity reasoning (20x cost signal)
+				"steps": 120,
+				"readOnly": false,
+				"fallback": ["anthropic/claude-opus-5-5", "deepseek/deepseek-v4-pro"]
+			}
+		}
+	},
+
+	// 4. Task-Based Selection Taxonomy (Shared across all presets)
+	// The orchestrator matches user intent against these patterns to delegate or split composite tasks
+	"taskPatterns": {
+		"fast": [
+			"search/grep/read",
+			"git-info/ls",
+			"lookup-docs",
+			"summarize-file",
+			"find-usages"
+		],
+		"medium": [
+			"impl/feature",
+			"refactor/rename",
+			"write-tests",
+			"fix-lint/typecheck",
+			"api-endpoint"
+		],
+		"heavy": [
+			"arch/system-design",
+			"debug-complex/race-condition",
+			"security-audit",
+			"multi-module-migration",
+			"performance-optimization"
+		]
+	},
+
+	// 5. Custom Orchestrator Routing Rules
+	"rules": [
+		"self∈opus→never→@heavy", // If orchestrator is already Opus, execute directly instead of double-paying
+		"composite-task→split(@fast:explore,@medium:implement)" // Explore cheap (1x), execute smart (5x)
+	]
+}

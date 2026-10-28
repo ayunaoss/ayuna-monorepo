@@ -6,7 +6,17 @@
 * For new projects, set `packageManager` to pnpm in `package.json`.
 * Run `pnpm install` from project root when dependency installation is required.
 * Use `jest` for testing, `biome` for formatting and linting. Install on approval as dev dependencies using pnpm.
+* Root-level `pnpm-workspace.yaml` lists the TypeScript projects. A new project missing there needs `pnpm nx workspace-sync`.
 * Fix lint and type-checking errors. Fix warnings where possible. Suppress a warning only with a specific, documented reason.
+
+## Checking and Debugging
+
+* Prefer local LSP (tsserver) diagnostics first; confirm with the CLI.
+* Run from the repo root, scoped to changed files:
+  * `pnpm exec biome check <files>` (add `--write` to apply safe fixes).
+  * `pnpm --filter <package-name> exec tsc --noEmit` for type-checking the owning project.
+  * `pnpm --filter <package-name> test` (or `pnpm exec jest <path>`) for related tests.
+* Run `pnpm install` only when dependencies changed and with approval.
 
 ## Code Formatting
 

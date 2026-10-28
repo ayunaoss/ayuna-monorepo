@@ -23,6 +23,15 @@
     Extend the yaml file to add linter and formatter specific configurations as needed.
 * For monorepos with `go.work`, run `go work sync` only when workspace dependencies change.
 
+## Checking and Debugging
+
+* Use root-level `go.work` as the workspace source; run commands from the repo root so all `use` modules resolve together. A new project missing from `go.work` needs `pnpm nx workspace-sync`.
+* Prefer local LSP (gopls) diagnostics first; confirm with `go vet`.
+* Check changed files by their packages, not the whole workspace:
+  * `go vet ./<module-dir>/<pkg>/...` (e.g. `go vet ./libs/go/<name>/...`)
+  * Whole module only when needed: `cd <module-dir> && go vet ./...`
+* For debugging, reproduce with `go vet` and `go test -run <Test> ./<pkg>`; add `-v` or `-race` only when required.
+
 ## Code Formatting
 
 * For nested functions and control blocks like `if`, `for`, and `switch` within the function body, prefer the following formatting style:
