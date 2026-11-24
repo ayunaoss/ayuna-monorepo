@@ -1,5 +1,5 @@
 {
-	"model": "anthropic/claude-sonnet-5-5",
+	"model": "opencode/deepseek-v4.1-flash",
 	"autoshare": false,
 	"mcp": {
 		"nx-mcp": {

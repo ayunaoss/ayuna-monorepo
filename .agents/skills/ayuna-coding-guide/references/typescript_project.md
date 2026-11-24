@@ -26,6 +26,8 @@
 
 ## Recommended Packages
 
+These are the project's first-choice packages, not optional suggestions. When a need matches one, use it; do not add a parallel library or hand-roll an equivalent. If an existing area uses another package, migrate it when you touch it or record a written exception in the change/ADR. Adding or replacing a package requires updating the approved dependency list and the licence inventory.
+
 * **[jest](https://github.com/jestjs/jest)**: For testing TypeScript code.
 * **[biome](https://github.com/biomejs/biome)**: For code formatting and linting TypeScript code.
 * **[typescript](https://www.typescriptlang.org/)**: For type-checking TypeScript code.

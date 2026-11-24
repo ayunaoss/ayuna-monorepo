@@ -31,7 +31,7 @@
 
 ## Recommended Packages
 
-Use the recommended packages for specific needs.
+These are the project's first-choice packages, not optional suggestions. When a need matches one, use it; do not add a parallel library or hand-roll an equivalent. If an existing area uses another package, migrate it when you touch it or record a written exception in the change/ADR. Adding or replacing a package requires updating the approved dependency list and the licence inventory.
 
 * **[ruff](https://github.com/charliermarsh/ruff)**: For linting and code formatting.
 * **[basedpyright](https://github.com/detachhead/basedpyright)**: For type checking and IntelliSense in Python projects.

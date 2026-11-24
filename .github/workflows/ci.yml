@@ -25,7 +25,27 @@ jobs:
           node-version: 24
           cache: 'pnpm'
 
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm exec biome ci .
-      - run: pnpm nx run-many -t lint test build typecheck e2e
+      - run: pnpm nx run licence-gate:gate
+
+      # Enforce the Go concurrency rule: conc for groups, no sync.WaitGroup,
+      # no errgroup, and no non-test bare `go` without an explicit exception.
+      # The guard is packaged in the coding-guide skill.
+      - run: uv run python .agents/skills/ayuna-coding-guide/assets/tools/go_guard/guard.py --root .
+      - run: uv run pytest .agents/skills/ayuna-coding-guide/assets/tools/go_guard
+
+      # Biome lint for the generated TypeScript bindings. This is the scoped
+      # replacement for the repo-root `biome ci .`, which has no root config
+      # and scans the virtualenv and generated formatting.
+      - run: pnpm nx run @ayunaio/bufgen:lint
+
+      # Go linters take a process-wide lock; run lint serially, then the rest
+      # in parallel.
+      - run: pnpm nx run-many -t lint --parallel=1
+      - run: pnpm nx run-many -t test build typecheck e2e
+
